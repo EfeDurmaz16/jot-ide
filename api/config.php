@@ -173,10 +173,15 @@ function isValidLanguage(string $language): bool {
  * Get client IP address
  */
 function getClientIp(): string {
+    var_dump($_SERVER);
+    
     return $_SERVER['HTTP_X_FORWARDED_FOR']
         ?? $_SERVER['HTTP_X_REAL_IP']
         ?? $_SERVER['REMOTE_ADDR']
         ?? '127.0.0.1';
+
+
+    
 }
 
 /**
