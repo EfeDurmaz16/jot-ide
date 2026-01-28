@@ -77,18 +77,8 @@ try {
         'clientIp' => hash('sha256', $clientIp) // Store hashed IP for debugging
     ];
 
-    // Push to BullMQ queue using Redis directly
-    // BullMQ uses specific Redis data structures
-    $queueKey = 'bull:' . QUEUE_NAME . ':waiting';
-    $jobKey = 'bull:' . QUEUE_NAME . ':' . $jobId;
-
-    // Store job data
-    $redis->hset($jobKey, 'data', json_encode($jobData));
-    $redis->hset($jobKey, 'opts', json_encode(['attempts' => 3, 'timeout' => 120000]));
-    $redis->hset($jobKey, 'timestamp', (string) (time() * 1000));
-
-    // Add to waiting list (BullMQ format)
-    $redis->lpush($queueKey, $jobId);
+    // Push to simple Redis queue
+    $redis->lpush('queue:' . QUEUE_NAME, json_encode($jobData));
 
     // Set initial job status
     $redis->setex('job:status:' . $jobId, JOB_RESULT_TTL, json_encode([

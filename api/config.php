@@ -45,7 +45,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 60,
         'memory_limit' => 536870912, // 512MB
         'nsjail_config' => 'c.cfg',
-        'hello_world' => '#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}'
+        'hello_world' => "#include <stdio.h>\nint main() {\n    printf(\"Hello, World!\\\\n\");\n    return 0;\n}"
     ],
     'cpp' => [
         'name' => 'C++ (G++)',
@@ -57,7 +57,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 60,
         'memory_limit' => 536870912, // 512MB
         'nsjail_config' => 'cpp.cfg',
-        'hello_world' => '#include <iostream>\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}'
+        'hello_world' => "#include <iostream>\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}"
     ],
     'java' => [
         'name' => 'Java',
@@ -71,7 +71,7 @@ const LANGUAGE_CONFIG = [
         'memory_limit' => 805306368, // 768MB
         'nsjail_config' => 'java.cfg',
         'source_filename' => 'Main.java',
-        'hello_world' => 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}'
+        'hello_world' => "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}"
     ],
     'go' => [
         'name' => 'Go',
@@ -83,7 +83,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 60,
         'memory_limit' => 536870912, // 512MB
         'nsjail_config' => 'go.cfg',
-        'hello_world' => 'package main\n\nimport "fmt"\n\nfunc main() {\n    fmt.Println("Hello, World!")\n}'
+        'hello_world' => "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}"
     ],
     'rust' => [
         'name' => 'Rust',
@@ -95,7 +95,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 90,
         'memory_limit' => 1073741824, // 1GB
         'nsjail_config' => 'rust.cfg',
-        'hello_world' => 'fn main() {\n    println!("Hello, World!");\n}'
+        'hello_world' => "fn main() {\n    println!(\"Hello, World!\");\n}"
     ],
     'php' => [
         'name' => 'PHP',
@@ -105,7 +105,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 30,
         'memory_limit' => 268435456, // 256MB
         'nsjail_config' => 'php.cfg',
-        'hello_world' => '<?php\necho "Hello, World!\\n";'
+        'hello_world' => "<?php\necho \"Hello, World!\\\\n\";"
     ]
 ];
 
