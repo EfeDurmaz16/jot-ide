@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jotform Code Interview Platform - Secure multi-language code execution">
+    <title>Code Interview Platform | Jotform</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/jotform-logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/jotform-theme.css">
+
+    <!-- Monaco Editor Loader -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs/loader.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__brand">
+                <img src="assets/jotform-logo.svg" alt="Jotform" class="header__logo">
+                <div>
+                    <h1 class="header__title">Code Interview Platform</h1>
+                    <p class="header__subtitle">Secure multi-language code execution</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="toolbar__group">
+                    <label class="toolbar__label" for="language-select">Language:</label>
+                    <div class="select-wrapper">
+                        <select id="language-select" class="select">
+                            <option value="python">Python 3</option>
+                            <option value="c">C (GCC)</option>
+                            <option value="cpp">C++ (G++)</option>
+                            <option value="java">Java</option>
+                            <option value="go">Go</option>
+                            <option value="rust">Rust</option>
+                            <option value="php">PHP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="toolbar__group" style="margin-left: auto;">
+                    <button id="run-btn" class="btn btn--primary">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Run Code
+                    </button>
+                    <button id="clear-btn" class="btn btn--secondary">
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Editor -->
+            <div class="editor-container">
+                <div class="editor-header">
+                    <span id="editor-filename" class="editor-header__filename">main.py</span>
+                    <div class="editor-header__actions">
+                        <span id="cache-badge" class="cache-badge" style="display: none;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                            </svg>
+                            Cached
+                        </span>
+                    </div>
+                </div>
+                <div id="editor"></div>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="output-panel">
+                <div class="output-tabs">
+                    <button class="output-tab output-tab--active" data-tab="stdout">Output</button>
+                    <button class="output-tab" data-tab="stderr">Errors</button>
+                </div>
+                <div id="output-stdout" class="output-content output-content--empty">
+                    Output will appear here...
+                </div>
+                <div id="output-stderr" class="output-content output-content--empty" style="display: none;">
+                    Errors will appear here...
+                </div>
+                <div class="status-bar">
+                    <div class="status-bar__item">
+                        <span id="status-indicator" class="status-bar__indicator"></span>
+                        <span id="status-text">Ready</span>
+                    </div>
+                    <div class="status-bar__item">
+                        <span>Press Ctrl+Enter to run</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by <a href="https://www.jotform.com" target="_blank" rel="noopener">Jotform</a> | Process isolation with nsjail</p>
+        </footer>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Executing code...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api-client.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html>

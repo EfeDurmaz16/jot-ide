@@ -1,0 +1,17 @@
+{
+  "name": "jotform-code-executor-worker",
+  "version": "1.0.0",
+  "description": "BullMQ worker for secure code execution",
+  "main": "worker.js",
+  "scripts": {
+    "start": "node worker.js",
+    "dev": "node --watch worker.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.1.0",
+    "ioredis": "^5.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
