@@ -40,18 +40,19 @@ const LANGUAGE_CONFIG = {
         compiler: '/usr/bin/javac',
         compileArgs: [],
         binary: '/usr/bin/java',
-        runArgs: ['Main'],
+        runArgs: ['-Xmx512m', 'Main'],
         timeout: 60000,
         sourceFile: 'Main.java'
     },
     go: {
         extension: 'go',
         compile: true,
-        compiler: '/usr/bin/go',
+        compiler: '/usr/lib/go-1.24/bin/go',
         compileArgs: ['build', '-o', 'output'],
         binary: './output',
         timeout: 60000,
-        sourceFile: 'main.go'
+        sourceFile: 'main.go',
+        env: { GOPATH: '/tmp/go', GOCACHE: '/tmp/go-cache' }
     },
     rust: {
         extension: 'rs',
@@ -66,6 +67,7 @@ const LANGUAGE_CONFIG = {
         extension: 'php',
         compile: false,
         binary: '/usr/bin/php',
+        runArgs: ['-d', 'display_errors=stderr'],
         timeout: 30000,
         sourceFile: 'main.php'
     }
@@ -124,11 +126,16 @@ async function compileCode(workDir, language, config) {
     return new Promise((resolve) => {
         const args = [...config.compileArgs, config.sourceFile];
 
-        const proc = spawn(config.compiler, args, {
+        const spawnOpts = {
             cwd: workDir,
             timeout: 30000,
             stdio: ['pipe', 'pipe', 'pipe']
-        });
+        };
+        if (config.env) {
+            spawnOpts.env = { ...process.env, ...config.env };
+        }
+
+        const proc = spawn(config.compiler, args, spawnOpts);
 
         let stdout = '';
         let stderr = '';
@@ -203,7 +210,11 @@ async function runInSandbox(workDir, language, config) {
                 args.push(...config.runArgs);
             }
         } else {
-            args.push(config.binary, config.sourceFile);
+            args.push(config.binary);
+            if (config.runArgs) {
+                args.push(...config.runArgs);
+            }
+            args.push(config.sourceFile);
         }
 
         const proc = spawn(NSJAIL_BIN, args, {

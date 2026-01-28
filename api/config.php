@@ -105,7 +105,7 @@ const LANGUAGE_CONFIG = [
         'timeout' => 30,
         'memory_limit' => 268435456, // 256MB
         'nsjail_config' => 'php.cfg',
-        'hello_world' => "<?php\necho \"Hello, World!\\\\n\";"
+        'hello_world' => "<?php\necho \"Hello, World!\\\\n\";\n?>"
     ]
 ];
 
